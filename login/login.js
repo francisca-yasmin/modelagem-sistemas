@@ -33,7 +33,7 @@ app.post('/auth', function(request, response){
     if(username && password){
         connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields){
             if (error) throw error;
-            if(results.lengt > 0){
+            if(results.length > 0){
                 request.session.loggedin = true;
                 request.session.username = username; //deixar mais dinamico
                 response.redirect('/home');
