@@ -37,8 +37,10 @@ app.get("/pergunta/:id", (req,res) => {
         where: {id: id}
     }).then(pergunta => {
         if(pergunta != undefined){
+
             Resposta.findAll({
-                where: {perguntaId: pergunta.id}
+                where: {perguntaId: pergunta.id},
+                order:[['id', 'DESC']]
             }).then(respostas => {
                 res.render("pergunta",{
                     pergunta: pergunta,
@@ -60,7 +62,7 @@ app.post("/responder", (req, res) => {
         corpo: corpo,
         perguntaId: perguntaId
     }).then(() => {
-        res.redirect("/perguntar/"+perguntaId);
+        res.redirect("/pergunta/" + perguntaId);
     });
 });
 
